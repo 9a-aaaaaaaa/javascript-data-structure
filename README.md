@@ -30,7 +30,7 @@
 
 ### 复杂度
 
-#### 事件复杂度
+#### 时间复杂度
 ![时间复杂度图](./png/2.png)
 
 - O(1) 只会执行一次
@@ -58,8 +58,51 @@ for(let i=0; i<n; j+=1) {
 }
 ```
 
+- O(n) * O(n) = O(n^2)  注意相乘和相加不一样
+```js
+for(let i=0; i<n; j+=1) {
+    for(let i=0; i<n; j+=1) {
+        console.log(i,j)
+    }
+}
+```
 
+- O(logN)
+  
+```js
+let i = 1;
+while(i<n) {
+    console.log(i); // 执行了logN 次
+    i *=2;
+}
+```
 
+#### 空间复杂度
+算法在运行过程中临时占用的内存空间大小的量度
+
+- O(1)
+```js
+let i = 0; // 占用的内存是单个变量，是一个恒定的值。永远是1
+i+=1;
+```
+- O(n)
+```js
+const list = []; // 声明这个数组，添加了n个值，相当于占用n个内存单元
+for(let i=0; i<n; j+=1) {
+   list.push(i);
+}
+```
+
+- O(n^2)
+```js
+const matrix = []; // 矩阵
+for(let i=0; i<n; i+=1) {
+    matrix.push([]);
+  for(let j=0; j<n; j+=1) {
+     matrix[i].push(j)
+  }
+}
+```
 
 # 二叉树
 
