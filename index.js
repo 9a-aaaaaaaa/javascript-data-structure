@@ -1,99 +1,54 @@
 // binary search tree
-// left < root < right
-
 class BST {
-  constructor(value) {
-    this.value = value;
+  constructor(val) {
+    this.value = val;
     this.left = null;
     this.right = null;
   }
 
-  insert(value) {
-    if (!this.value) return (this.value = value);
-    if (value < this.value) {
-      if (!this.left) {
-        this.left = new BST(value);
-      } else {
-        this.left.insert(value);
-      }
+  insert(val) {
+    if (!this.value) return (this.value = val);
+    if (val > this.value) {
+      if (!this.right) this.right = new BST(val);
+      else this.right.insert(val);
     } else {
-      if (!this.right) {
-        this.right = new BST(value);
+      if (!this.left) this.left = new BST(val);
+      else this.left.insert(val);
+    }
+  }
+
+  // 这个其实就是深度搜索算法
+  // Depth-First Search，DFS
+  // 递归实现
+  depthFirstSearch(val) {
+    if (this.value === val) return this;
+    else {
+      if (val < this.value) {
+        if (this.left) return this.left.depthFirstSearch(val);
+        else return null;
       } else {
-        this.right.insert(value);
+        if (this.right) return this.right.depthFirstSearch(val);
+        else return null;
       }
     }
   }
-  contains(value) {
-    if (value === this.value) return true;
-    if (value < this.value) {
-      if (!this.left) return false;
-      else return this.left.contains(value);
-    } else {
-      if (!this.right) return false;
-      else return this.right.contains(value);
-    }
+
+  // 非递归实现
+  depthFirstSearchNotRecursive() {
+    const queue = [];
   }
 
-  // 中序是从最小遍历到最大的过程
-  inOrderTraverse(callback) {
-    if (this.left) {
-      this.left.inOrderTraverse(callback);
-    }
-    callback(this.value);
-    if (this.right) {
-      this.right.inOrderTraverse(callback);
-    }
-  }
-
-  // 先序遍历
-  preOrderTraverse(callback) {
-    callback(this.value);
-    if (this.left) {
-      this.left.preOrderTraverse(callback);
-    }
-    if (this.right) {
-      this.right.preOrderTraverse(callback);
-    }
-  }
-
-  // 后续
-  postOrderTraverse(callback) {
-    if (this.right) {
-      this.right.postOrderTraverse(callback);
-    }
-    callback(this.value);
-    if (this.left) {
-      this.left.postOrderTraverse(callback);
-    }
-  }
-
-  // 广度优先搜索
-  // 广度优先搜索算法（又称宽度优先搜索）是最简便的图的搜索算法之一。
-  // BFS 搜索结果是一个队列，每次从队列中取出一个节点，然后将其所有的相邻节点加入队列中，
-  breadthFirstSearch(value) {
-    let queue = [this];
+  // bfs
+  // 广度搜索
+  breadthFirstSearch(val) {
+    const queue = [this];
     while (queue.length) {
-      let node = queue.shift();
-      if (node.value === value) return node;
-      if (node.left) queue.push(node.left);
-      if (node.right) queue.push(node.right);
+      const active = queue.shift();
+      if (active.value === val) return active;
+      if (active.left) queue.push(active.left);
+      if (active.right) queue.push(active.right);
     }
     return null;
-  }
-
-  // 深度优先搜索
-  // DFS 搜索结果是一个栈，每次从栈中取出一个节点，然后将其所有的相邻节点压入栈中，
-  // https://blog.csdn.net/weixin_43314519/article/details/107412412
-  depthFirstSearch(value) {
-    if (value === this.value) return this;
-    if (value < this.value) {
-      if (!this.left) return null;
-      else return this.left.depthFirstSearch(value);
-    } else {
-      if (!this.right) return null;
-      else return this.right.depthFirstSearch(value);
-    }
   }
 
   max() {
@@ -106,56 +61,60 @@ class BST {
     return this.value;
   }
 
-  // 需要考虑以下三种情况的case: 来实现。
-  // 1:叶子节点
-  // 2:有一个子节点
-  // 3:有两个子节点
-  remove(value) {
-    if (value < this.value) {
-      if (!this.left) return null;
-      this.left = this.left.remove(value);
-    } else if (value > this.value) {
-      if (!this.right) return null;
-      this.right = this.right.remove(value);
-    } else {
-      if (!this.left && !this.right) return null;
-      else if (!this.left) return this.right;
-      else if (!this.right) return this.left;
-      else {
-        let temp = this.right;
-        while (temp.left) {
-          temp = temp.left;
-        }
-        this.value = temp.value;
-        this.right = this.right.remove(temp.value);
-      }
+  // 中序遍历 左根右
+  inOrderTraverse(callback) {
+    this.left && this.left.inOrderTraverse(callback);
+    callback(this.value);
+    this.right && this.right.inOrderTraverse(callback);
+  }
+
+  // 后序：左右根
+  postOrderTraverse(callback) {
+    if (this.left) {
+      this.left.afterOrderTraverse(callback);
     }
-    return this;
+
+    if (this.right) {
+      this.right.afterOrderTraverse(callback);
+    }
+
+    callback(this.value);
+  }
+
+  // 前序： 根左右
+  preOrderTraverse(callback) {
+    callback(this.value);
+    if (this.left) {
+      this.left.preOrderTraverse(callback);
+    }
+
+    if (this.right) {
+      this.right.preOrderTraverse(callback);
+    }
   }
 }
 
 var bst = new BST();
-console.log('[ =====bst ]-146', bst);
 
 bst.insert(100);
-bst.insert(50);
 bst.insert(150);
-bst.insert(25);
-bst.insert(75);
-bst.insert(125);
-bst.insert(175);
-bst.insert(10);
+bst.insert(50);
+bst.insert(80);
+bst.insert(30);
+bst.insert(130);
+bst.insert(180);
 
-// bst.inOrderTraverse(i=>console.log(i));
-// bst.postOrderTraverse(i=>console.log(i));
-bst.preOrderTraverse((i) => console.log(i));
+console.log('bst is', bst);
 
-const res = bst.breadthFirstSearch(25);
-console.log('搜索的结果是', res);
+console.log('this depthFirstSearch val1 50', bst.depthFirstSearch(50));
+console.log('this depthFirstSearch val1 150', bst.depthFirstSearch(150));
+console.log('this depthFirstSearch val1 80', bst.depthFirstSearch(80));
+console.log('this depthFirstSearch val1 60', bst.depthFirstSearch(60));
+console.log('this depthFirstSearch val1 160', bst.depthFirstSearch(160));
+console.log('this depthFirstSearch val1 1000', bst.depthFirstSearch(1000));
 
-console.log('是否包含', bst.contains(101));
+console.log('max is', bst.max());
+console.log('min is', bst.min());
 
-console.log('[ 最大值是 ]-139', bst.max());
-console.log('[ 最小值是 ]-25', bst.min());
-
-bst.remove(25);
+bst.preOrderTraverse((i) => console.log('先序遍历的结果是', i));
+console.log('bfs', bst.breadthFirstSearch(130));
