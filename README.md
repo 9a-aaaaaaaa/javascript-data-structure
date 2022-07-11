@@ -1,6 +1,11 @@
 # 数据结构与算法
+What is a data structure?
 
-视频课程： https://www.youtube.com/watch?v=FVoOh6zxEDY&list=PLwIrqQCQ5pQmjH6YyFvH2A9FYL6bBB4Ra
+a data structure(DS) is a way of organizing data so that it can be used efficiently.
+
+- 非常棒的视频分享课： https://www.youtube.com/watch?v=RBSGKlAvoiM&t=1661s
+- b站的切割视频： https://www.bilibili.com/video/BV1eS4y1v7qc?spm_id_from=333.999.0.0&vd_source=747a8ff9c723e281e4b23bbc83a47dfd
+- 视频课程： https://www.youtube.com/watch?v=FVoOh6zxEDY&list=PLwIrqQCQ5pQmjH6YyFvH2A9FYL6bBB4Ra
 理论：
 
 ![理论](./png/1.png "理论基础图片")
@@ -105,8 +110,73 @@ for(let i=0; i<n; i+=1) {
 ```
 
 # 栈
-一个后进先出的数据结构。javascript 中没有栈，但我们可以用array实现栈的所有功能。
+一个**后进先出**的数据结构。javascript 中没有栈，但我们可以用`array`实现栈的所有功能。
 ![栈的数据结构](./png/3.png);
+
+常见的使用场景：**所有后进先出的场景，比如：十进制转换为二进制，判断字符串的括号有效，函数调用堆栈**。
+- 十进制转换为二进制
+- eg 有效的长度 还可以使用字典来优化。时间复杂度O(n)，空间复杂度：O(n)
+  
+```js
+var isValid = function(str) {
+    const stack = [];
+    for(let i=0; i<str.length; i++){
+        const c = str[i];
+        if(c === '(' || c === '[' || c === '{'){
+            stack.push(c);
+        } else {
+            const top = stack[stack.length - 1];
+            if( (top === '(' && c === ')') ||
+                (top === '[' && c === ']') ||
+                (top === '{' && c === '}') ) {
+                stack.pop();
+            }
+            else {
+                return false;
+            }  
+        }
+    }
+    return stack.length === 0; 
+};
+```
+
+后出来的余数反而要排到前面，把余数依次放到栈中，就可以实现余数倒序输出。
+
+![十进制转换为二进制](./png/4.png)  
+
+
+- 有效的括号
+  左括号入栈，右括号出栈，如果出栈的括号不是左括号，则说明不是有效的括号。
+![有效的括号](./png/5.png)  
+
+- 函数调用堆栈 call stack
+![是编译器自动实现的](./png/6.png) 
+
+
+# 队列
+
+一个**先进先出**的数据结构。javascript 中没有队列，但我们可以用`array`实现队列的所有功能。
+
+使用场景：所有需要先进先出的场景，保证有序性。eg: 食堂排队打饭
+
+- js 引擎利用队列来实现 异步任务队列
+
+js 是单线程的，无法同时执行多个任务，所以需要一个队列来保证任务的执行顺序。
+
+![任务队列](./png/8.png) 
+
+- 计算最近的请求次数 
+  
+# 链表
+链表：一个简单的数据结构，它提供了一种链式存储方式，允许我们在任意位置插入、删除、查找等操作。
+元素的存储是不连续的。
+
+![链表](./png/9.png)
+
+和数组的区别：
+- 数组是连续的，每个元素都是一个单独的内存单元。
+- 增删改查的时间复杂度都是O(1)，但是链表的插入、删除、查找的时间复杂度都是O(n)。
+- 增删非收尾元素时数组需要重新分配内存，链表不需要。链表只需要修改指针即可。
 
 # 二叉树
 
