@@ -181,6 +181,36 @@ js 是单线程的，无法同时执行多个任务，所以需要一个队列�
 # 二叉树
 
 在线可视化网站
-
 - http://btv.melezinek.cz/binary-search-tree.html
 - https://visualgo.net/en/bst
+- 二叉树分类： https://www.zoo.team/article/binary-heap-with-js
+
+满二叉树肯定是一颗完全二叉树。
+
+![完全二叉树](./png/10.png) 
+
+
+
+
+# 其他
+
+### 1: 2进制
+```js
+const num = 10; // 1010
+// 转换为2进制
+const bNumber = num.toString(2);
+
+// 转换为10进制
+const number = parseInt(bNumber,10); 
+
+const cbNumber = 0b1010; //  js 的表示方式2进制的表示方法
+
+1010 >> 1; // 右移动可以理解为除以2，整体向右移动一位，移动的位数是1。前面补0。得到的结果是：0101(5)
+```
+
+### 2: 更好的写法
+```js
+var num = (right + left)/2; 
+// 两种写法一个效果，下面的更加安全，不会造成溢出。
+var num2 = left + (right-left)/2;
+```
