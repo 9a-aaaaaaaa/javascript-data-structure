@@ -100,8 +100,11 @@ const h = new MinHeap();
 h.insert(10);
 h.insert(8);
 h.insert(15);
+h.insert(5);
+h.insert(7);
 
 console.log('[ h ]-104', h)
+console.log("peek is:", h.peek());
 // h.pop();
 // console.log(h); // MinHeap { heap: [ 2, 4, 3 ] }
 // h.peek();
