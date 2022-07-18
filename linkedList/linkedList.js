@@ -17,6 +17,7 @@ class LinkedList{
         this.head  = null || new ListNode(node);
     }
 
+    // 也可以单独统计这个值，全局++设置
     length(){
         let current = this.head;
         let count = 0;
@@ -108,9 +109,10 @@ class LinkedList{
     }
 }
 
-// const list = new LinkedList(100);
-// list.append(200);
-// list.append(300);
-// list.append(400);
-// list.append(500);
-// list.print();
+const list = new LinkedList(100);
+list.append(200);
+list.append(300);
+list.append(400);
+list.append(500);
+list.append(600)
+list.print();
