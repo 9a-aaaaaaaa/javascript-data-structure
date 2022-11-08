@@ -1,3 +1,5 @@
+> No war, support Ukraine 🇺🇦!
+
 # 数据结构与算法
 What is a data structure?
 
