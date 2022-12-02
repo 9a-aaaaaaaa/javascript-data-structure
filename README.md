@@ -16,7 +16,7 @@ a data structure(DS) is a way of organizing data so that it can be used efficien
 - 视频课程： https://www.youtube.com/watch?v=FVoOh6zxEDY&list=PLwIrqQCQ5pQmjH6YyFvH2A9FYL6bBB4Ra
 理论：
 
-![理论](./png/1.png "理论基础图片")
+
 
 - 重点关注：数据结构和算法的特点，应用场景，时间和空间复杂度。
 - 刷题：建议分类刷题，相当于集中训练。
@@ -44,7 +44,8 @@ a data structure(DS) is a way of organizing data so that it can be used efficien
 ###  4. <a name='复杂度'></a>复杂度
 
 ####  4.1. <a name='时间复杂度'></a>时间复杂度
-![时间复杂度图](./png/2.png)
+
+<img src="./png/2.png" style="width:360px;">
 
 - O(1) 只会执行一次
 
@@ -197,29 +198,6 @@ js 是单线程的，无法同时执行多个任务，所以需要一个队列�
 
 [深度优先和广度优先搜索](./%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2%E5%92%8C%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2.md)
 
-满二叉树肯定是一颗完全二叉树。
-
-![完全二叉树](./png/10.jpg) 
-
-
-##  5. <a name='heap-堆'></a>heap 堆
-![完全二叉树](./png/14.png) 
-
-
- 堆排序是排序算法中的一种，算法时间复杂度是O(n log(n))。heapify操作完成堆排序
-
-堆必须满足完全二叉树，并且满足堆的性质：
-- 堆的每个`parent`值都大于或等于其左右孩子的值。
-- 叶子节点必须是从左边开始
-- 构建堆可以从h-1层开始，也就是倒数第二层，这样可以从最小的堆逐渐到稳定态的堆，变成一颗完整的堆。
-
-以下全是完全二叉树。
-![完全二叉树](./png/11.png) 
-
-![完全二叉树](./png/12.png) 
-
-向下取整，保留整数的部分。
-![完全二叉树](./png/13.png) 
 
 
 
