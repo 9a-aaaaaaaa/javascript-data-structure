@@ -74,7 +74,7 @@ function midSort2(bt) {
     // 指针，需要将所有的左放到栈里面
     let p = bt;
    
-    while(q.length || p) {
+    while(stack.length || p) {
         while(p) {
             stack.push(p);
             p = p.left;
@@ -125,4 +125,4 @@ function afterSort2(bt) {
     return res;
 }
 
-console.log(afterSort2(bt),afterSort(bt));
+console.log(midSort2(bt));
